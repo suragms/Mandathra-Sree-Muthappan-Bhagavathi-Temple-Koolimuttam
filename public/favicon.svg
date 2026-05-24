@@ -1,0 +1,176 @@
+<svg
+  width="200"
+  height="200"
+  viewBox="0 0 200 200"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <defs>
+    {/* Top arc for Malayalam text (clockwise) */}
+    <path id="top-text-path" d="M 32 100 A 68 68 0 0 1 168 100" fill="none" />
+    {/* Bottom arc for English text (counter-clockwise) */}
+    <path id="bottom-text-path" d="M 32 100 A 68 68 0 0 0 168 100" fill="none" />
+    
+    {/* Gold Gradients */}
+    <linearGradient id="logo-gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF2B2" />
+      <stop offset="50%" stop-color="#D4AF37" />
+      <stop offset="100%" stop-color="#AA7C11" />
+    </linearGradient>
+    
+    <linearGradient id="logo-gold-glow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#D4AF37" stop-opacity="0.4" />
+      <stop offset="100%" stop-color="#D4AF37" stop-opacity="0" />
+    </linearGradient>
+
+    <linearGradient id="logo-flame-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFF5C3" />
+      <stop offset="35%" stop-color="#FFC83B" />
+      <stop offset="70%" stop-color="#FF5E36" />
+      <stop offset="100%" stop-color="#B31010" />
+    </linearGradient>
+
+    {/* Radial Glow Filter */}
+    <filter id="sacred-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <style>
+    @keyframes flame-flicker {
+      0%, 100% {
+        transform: scale(1) translate(0px, 0px);
+        opacity: 0.95;
+      }
+      20% {
+        transform: scale(1.05) translate(-0.5px, -0.3px);
+        opacity: 1;
+      }
+      40% {
+        transform: scale(0.96) translate(0.3px, 0px);
+        opacity: 0.9;
+      }
+      60% {
+        transform: scale(1.03) translate(-0.2px, -0.6px);
+        opacity: 0.98;
+      }
+      80% {
+        transform: scale(0.97) translate(0.4px, 0.2px);
+        opacity: 0.92;
+      }
+    }
+    .flame-element {
+      animation: flame-flicker 2.8s ease-in-out infinite;
+      transform-origin: 100px 76px;
+    }
+    .flame-element-inner {
+      animation: flame-flicker 2s ease-in-out infinite alternate;
+      transform-origin: 100px 74px;
+      animation-delay: 0.15s;
+    }
+  </style>
+
+  {/* Background Spiritual Halo Glow */}
+  <circle cx="100" cy="100" r="82" fill="url(#logo-gold-glow)" opacity="0.4" />
+
+  {/* Outermost Ring */}
+  <circle cx="100" cy="100" r="92" fill="none" stroke="url(#logo-gold)" stroke-width="1.5" />
+  
+  {/* Dashed Inner Ring */}
+  <circle cx="100" cy="100" r="87" fill="none" stroke="url(#logo-gold)" stroke-width="1" stroke-dasharray="2, 3" opacity="0.8" />
+  
+  {/* Solid text boundary ring */}
+  <circle cx="100" cy="100" r="77" fill="none" stroke="url(#logo-gold)" stroke-width="1" opacity="0.6" />
+
+  {/* Curved Text */}
+  <text font-style="normal" font-weight="700">
+    <textPath
+      href="#top-text-path"
+      startOffset="50%"
+      text-anchor="middle"
+      fill="#F5E9C9"
+      style="font-family: 'Manjari', 'Noto Sans Malayalam', sans-serif; font-size: 8px; letter-spacing: 0.8px;"
+    >
+      മണ്ടത്ര ശ്രീ മുത്തപ്പൻ ഭഗവതി ക്ഷേത്രം
+    </textPath>
+  </text>
+
+  <text font-style="normal" font-weight="600">
+    <textPath
+      href="#bottom-text-path"
+      startOffset="50%"
+      text-anchor="middle"
+      fill="url(#logo-gold)"
+      style="font-family: 'Cinzel', serif; font-size: 6.5px; letter-spacing: 2.5px;"
+    >
+      KOOLIMUTTAM • THRISSUR
+    </textPath>
+  </text>
+
+  {/* Inner Crest Solid Ring */}
+  <circle cx="100" cy="100" r="54" fill="#0B0A07" stroke="url(#logo-gold)" stroke-width="1.25" />
+  <circle cx="100" cy="100" r="50" fill="none" stroke="url(#logo-gold)" stroke-width="0.5" stroke-dasharray="1, 2" opacity="0.5" />
+
+  {/* Theyyam Thirumudi Arches &amp; Rays */}
+  <g stroke="url(#logo-gold)" fill="none" stroke-linecap="round" opacity="0.75">
+    <path d="M 68 112 A 34 34 0 0 1 132 112" stroke-width="1" stroke-dasharray="1.5, 2.5" />
+    <path d="M 62 112 A 40 40 0 0 1 138 112" stroke-width="1.2" />
+    
+    <line x1="100" y1="72" x2="100" y2="65" stroke-width="1.5" />
+    <line x1="88" y1="75" x2="84" y2="69" stroke-width="1.2" />
+    <line x1="112" y1="75" x2="116" y2="69" stroke-width="1.2" />
+    <line x1="78" y1="84" x2="73" y2="79" stroke-width="1.2" />
+    <line x1="122" y1="84" x2="127" y2="79" stroke-width="1.2" />
+    <line x1="72" y1="96" x2="66" y2="93" stroke-width="1.2" />
+    <line x1="128" y1="96" x2="134" y2="93" stroke-width="1.2" />
+  </g>
+
+  {/* Nilavilakku (Traditional Kerala Brass Lamp) */}
+  <g>
+    <path
+      d="M 83 148 L 117 148 L 114 142 H 86 Z"
+      fill="url(#logo-gold)"
+    />
+    <path
+      d="M 87 142 L 113 142 L 110 136 H 90 Z"
+      fill="url(#logo-gold)"
+      opacity="0.9"
+    />
+    <path
+      d="M 91 136 L 109 136 L 106 130 H 94 Z"
+      fill="url(#logo-gold)"
+      opacity="0.8"
+    />
+
+    <path
+      d="M 98 130 H 102 V 96 H 98 Z"
+      fill="url(#logo-gold)"
+    />
+    
+    <path d="M 96 119 H 104 V 121 H 96 Z" fill="url(#logo-gold)" />
+    <path d="M 96 106 H 104 V 108 H 96 Z" fill="url(#logo-gold)" opacity="0.9" />
+
+    <path
+      d="M 82 96 C 82 96 82 105 100 105 C 118 105 118 96 118 96 Z"
+      fill="url(#logo-gold)"
+    />
+    <path
+      d="M 80 93 H 120 V 96 H 80 Z"
+      fill="url(#logo-gold)"
+    />
+
+    <path
+      d="M 100 58 C 93 72 96 86 100 86 C 104 86 107 72 100 58 Z"
+      fill="url(#logo-flame-grad)"
+      filter="url(#sacred-glow)"
+      class="flame-element"
+      opacity="0.9"
+    />
+    <path
+      d="M 100 66 C 96 74 97 84 100 84 C 103 84 104 74 100 66 Z"
+      fill="#FFF5C3"
+      class="flame-element-inner"
+      opacity="0.95"
+    />
+  </g>
+</svg>
