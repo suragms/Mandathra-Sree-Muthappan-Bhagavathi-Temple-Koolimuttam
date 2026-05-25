@@ -32,6 +32,7 @@ function ContactPage() {
       label: "Address",
       value: "മണ്ടത്ര ശ്രീ മുത്തപ്പൻ ഭഗവതി ക്ഷേത്രം, പി.ഒ. കൂളിമട്ടം, തൃശ്ശൂർ - 680691",
       subtitle: "Mandathra Sree Muthappan Bhagavathi Temple, P.O. Koolimuttam, Thrissur - 680691",
+      href: "https://share.google/ykFbz9xgrCEjdyXmx",
     },
     {
       icon: Shield,
@@ -97,7 +98,7 @@ function ContactPage() {
           >
             {items.map((it, i) => {
               const Inner = (
-                <div className="flex items-start gap-5 p-6 glass-sacred rounded-sm hover:border-gold/40 transition-colors">
+                <div className="flex items-start gap-5 p-6 glass-sacred rounded-sm hover:border-gold/40 transition-colors h-full">
                   <div className="w-11 h-11 rounded-full border border-gold/40 flex items-center justify-center shrink-0">
                     <it.icon className="w-5 h-5 text-gold" strokeWidth={1.5} />
                   </div>
@@ -128,15 +129,25 @@ function ContactPage() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.9 }}
-            className="rounded-sm overflow-hidden border border-gold/20 min-h-[420px]"
+            className="rounded-sm overflow-hidden border border-gold/20 min-h-[420px] relative group"
           >
             <iframe
               title="Mandathra Temple location on Google Maps"
-              src="https://www.google.com/maps?q=Thrissur,Kerala&output=embed"
+              src="https://www.google.com/maps?q=Mandathra+Sree+Muthappan+Bhagavathi+Temple+Koolimuttam&output=embed"
               className="w-full h-full min-h-[420px] grayscale-[0.4] contrast-90"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             />
+            <div className="absolute bottom-4 right-4 z-30">
+              <a
+                href="https://share.google/ykFbz9xgrCEjdyXmx"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-background/90 text-gold text-xs font-semibold hover:bg-gold hover:text-background border border-gold/40 shadow-lg transition-all duration-300"
+              >
+                <MapPin className="w-3.5 h-3.5" /> Open in Google Maps
+              </a>
+            </div>
           </motion.div>
         </div>
 

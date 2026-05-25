@@ -648,26 +648,33 @@ function ContactStrip() {
             <div className="flex gap-4">
               <MapPin className="w-5 h-5 text-gold shrink-0 mt-0.5" />
               <div>
-                <p className="font-malayalam text-gold/85 mb-0.5">സ്ഥലം</p>
-                <p className="text-foreground/85">
-                  Mandathra, Thrissur District, Kerala — 680000
+                <p className="font-malayalam text-gold/85 mb-0.5">സ്ഥലം (മേൽവിലാസം)</p>
+                <p className="text-foreground/85 leading-relaxed">
+                  മണ്ടത്ര ശ്രീ മുത്തപ്പൻ ഭഗവതി ക്ഷേത്രം, പി.ഒ. കൂളിമട്ടം, തൃശ്ശൂർ - 680691
+                </p>
+                <p className="text-xs text-muted-foreground mt-0.5 font-display tracking-wide">
+                  Mandathra Sree Muthappan Bhagavathi Temple, P.O. Koolimuttam, Thrissur - 680691
                 </p>
               </div>
             </div>
             <div className="flex gap-4">
               <Phone className="w-5 h-5 text-gold shrink-0 mt-0.5" />
               <div>
-                <p className="font-malayalam text-gold/85 mb-0.5">ഫോൺ</p>
-                <p className="text-foreground/85">+91 00000 00000</p>
+                <p className="font-malayalam text-gold/85 mb-0.5">ഫോൺ (സെക്രട്ടറി)</p>
+                <a href="tel:+919495224141" className="text-foreground/85 hover:text-gold transition-colors font-medium">
+                  +91 94952 24141
+                </a>
               </div>
             </div>
           </div>
-          <Link
-            to="/contact"
-            className="mt-10 inline-flex items-center gap-2 px-6 py-3 rounded-full gradient-gold text-background font-medium text-sm tracking-wide glow-lamp"
+          <a
+            href="https://share.google/ykFbz9xgrCEjdyXmx"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-10 inline-flex items-center gap-2 px-6 py-3 rounded-full gradient-gold text-background font-medium text-sm tracking-wide glow-lamp hover:brightness-110 transition-all duration-300"
           >
             Get Directions <ArrowRight className="w-4 h-4" />
-          </Link>
+          </a>
         </motion.div>
 
         <motion.div
@@ -675,15 +682,25 @@ function ContactStrip() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.9 }}
-          className="rounded-sm overflow-hidden border border-gold/15 min-h-[360px]"
+          className="rounded-sm overflow-hidden border border-gold/15 min-h-[360px] relative group"
         >
           <iframe
             title="Mandathra Temple location"
-            src="https://www.google.com/maps?q=Thrissur,Kerala&output=embed"
+            src="https://www.google.com/maps?q=Mandathra+Sree+Muthappan+Bhagavathi+Temple+Koolimuttam&output=embed"
             className="w-full h-full min-h-[360px] grayscale-[0.4] contrast-90"
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
           />
+          <div className="absolute bottom-4 right-4 z-30">
+            <a
+              href="https://share.google/ykFbz9xgrCEjdyXmx"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-background/90 text-gold text-xs font-semibold hover:bg-gold hover:text-background border border-gold/40 shadow-lg transition-all duration-300"
+            >
+              <MapPin className="w-3.5 h-3.5" /> Open in Google Maps
+            </a>
+          </div>
         </motion.div>
       </div>
     </section>
