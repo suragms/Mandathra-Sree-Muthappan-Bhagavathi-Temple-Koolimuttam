@@ -4,6 +4,7 @@ import { PageHero } from "@/components/temple/PageHero";
 import { SectionHeading } from "@/components/temple/SectionHeading";
 import templeExterior from "@/assets/temple-exterior.png";
 import kalvilakkuCourtyard from "@/assets/kalvilakku-courtyard.png";
+import { CommitteeSection } from "@/components/temple/CommitteeSection";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -110,6 +111,11 @@ function AboutPage() {
             </p>
           </div>
         </div>
+      </section>
+
+      <div className="ornate-divider max-w-5xl mx-auto" />
+      <section className="relative py-12">
+        <CommitteeSection showTitle={true} />
       </section>
     </>
   );

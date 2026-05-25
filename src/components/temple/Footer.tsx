@@ -19,6 +19,7 @@ export function Footer() {
           <h4 className="font-display text-sm tracking-[0.25em] text-gold mb-4">VISIT</h4>
           <ul className="space-y-3 text-sm text-muted-foreground">
             <li><Link to="/about" className="hover:text-gold transition-colors">About Temple</Link></li>
+            <li><Link to="/administration" className="hover:text-gold transition-colors">Administration</Link></li>
             <li><Link to="/theyyam" className="hover:text-gold transition-colors">Theyyam Tradition</Link></li>
             <li><Link to="/offerings" className="hover:text-gold transition-colors">Vazhipadu</Link></li>
             <li><Link to="/festivals" className="hover:text-gold transition-colors">Festivals</Link></li>
@@ -29,9 +30,21 @@ export function Footer() {
         <div>
           <h4 className="font-display text-sm tracking-[0.25em] text-gold mb-4">CONTACT</h4>
           <ul className="space-y-3 text-sm text-muted-foreground">
-            <li className="flex gap-2.5"><MapPin className="w-4 h-4 text-gold mt-0.5 shrink-0" /><span>Mandathra, Thrissur, Kerala</span></li>
-            <li className="flex gap-2.5"><Phone className="w-4 h-4 text-gold mt-0.5 shrink-0" /><span>+91 00000 00000</span></li>
-            <li className="flex gap-2.5"><Mail className="w-4 h-4 text-gold mt-0.5 shrink-0" /><span>info@mandathratemple.org</span></li>
+            <li className="flex gap-2.5">
+              <MapPin className="w-4 h-4 text-gold mt-0.5 shrink-0" />
+              <span>Mandathra, Koolimuttam, Thrissur - 680691</span>
+            </li>
+            <li className="flex gap-2.5">
+              <Phone className="w-4 h-4 text-gold mt-0.5 shrink-0" />
+              <a href="tel:+919495224141" className="hover:text-gold transition-colors">+91 94952 24141 (Sec)</a>
+            </li>
+            <li className="flex gap-2.5">
+              <Mail className="w-4 h-4 text-gold mt-0.5 shrink-0" />
+              <a href="mailto:info@mandathratemple.org" className="hover:text-gold transition-colors">info@mandathratemple.org</a>
+            </li>
+            <li className="flex gap-2.5 text-xs text-gold/60 pt-1 border-t border-gold/10">
+              <span>Reg No: 603/99</span>
+            </li>
           </ul>
         </div>
       </div>

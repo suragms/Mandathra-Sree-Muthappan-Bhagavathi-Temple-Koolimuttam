@@ -7,6 +7,7 @@ import { TempleLogo } from "@/components/temple/TempleLogo";
 const links = [
   { to: "/", label: "Home", ml: "ഹോം" },
   { to: "/about", label: "About", ml: "ക്ഷേത്രം" },
+  { to: "/administration", label: "Committee", ml: "ഭരണസമിതി" },
   { to: "/theyyam", label: "Theyyam", ml: "തെയ്യം" },
   { to: "/offerings", label: "Offerings", ml: "വഴിപാട്" },
   { to: "/festivals", label: "Festivals", ml: "ഉത്സവം" },

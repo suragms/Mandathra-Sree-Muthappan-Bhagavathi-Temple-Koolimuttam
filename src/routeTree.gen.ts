@@ -10,22 +10,17 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TheyyamRouteImport } from './routes/theyyam'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as OfferingsRouteImport } from './routes/offerings'
 import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as FestivalsRouteImport } from './routes/festivals'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as AdministrationRouteImport } from './routes/administration'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 
 const TheyyamRoute = TheyyamRouteImport.update({
   id: '/theyyam',
   path: '/theyyam',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: '/sitemap.xml',
-  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const OfferingsRoute = OfferingsRouteImport.update({
@@ -48,6 +43,11 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdministrationRoute = AdministrationRouteImport.update({
+  id: '/administration',
+  path: '/administration',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
@@ -62,32 +62,32 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/administration': typeof AdministrationRoute
   '/contact': typeof ContactRoute
   '/festivals': typeof FestivalsRoute
   '/gallery': typeof GalleryRoute
   '/offerings': typeof OfferingsRoute
-  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/theyyam': typeof TheyyamRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/administration': typeof AdministrationRoute
   '/contact': typeof ContactRoute
   '/festivals': typeof FestivalsRoute
   '/gallery': typeof GalleryRoute
   '/offerings': typeof OfferingsRoute
-  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/theyyam': typeof TheyyamRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/administration': typeof AdministrationRoute
   '/contact': typeof ContactRoute
   '/festivals': typeof FestivalsRoute
   '/gallery': typeof GalleryRoute
   '/offerings': typeof OfferingsRoute
-  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/theyyam': typeof TheyyamRoute
 }
 export interface FileRouteTypes {
@@ -95,42 +95,42 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/administration'
     | '/contact'
     | '/festivals'
     | '/gallery'
     | '/offerings'
-    | '/sitemap.xml'
     | '/theyyam'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
+    | '/administration'
     | '/contact'
     | '/festivals'
     | '/gallery'
     | '/offerings'
-    | '/sitemap.xml'
     | '/theyyam'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/administration'
     | '/contact'
     | '/festivals'
     | '/gallery'
     | '/offerings'
-    | '/sitemap.xml'
     | '/theyyam'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  AdministrationRoute: typeof AdministrationRoute
   ContactRoute: typeof ContactRoute
   FestivalsRoute: typeof FestivalsRoute
   GalleryRoute: typeof GalleryRoute
   OfferingsRoute: typeof OfferingsRoute
-  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TheyyamRoute: typeof TheyyamRoute
 }
 
@@ -141,13 +141,6 @@ declare module '@tanstack/react-router' {
       path: '/theyyam'
       fullPath: '/theyyam'
       preLoaderRoute: typeof TheyyamRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
-      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/offerings': {
@@ -178,6 +171,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/administration': {
+      id: '/administration'
+      path: '/administration'
+      fullPath: '/administration'
+      preLoaderRoute: typeof AdministrationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about': {
       id: '/about'
       path: '/about'
@@ -198,11 +198,11 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  AdministrationRoute: AdministrationRoute,
   ContactRoute: ContactRoute,
   FestivalsRoute: FestivalsRoute,
   GalleryRoute: GalleryRoute,
   OfferingsRoute: OfferingsRoute,
-  SitemapDotxmlRoute: SitemapDotxmlRoute,
   TheyyamRoute: TheyyamRoute,
 }
 export const routeTree = rootRouteImport

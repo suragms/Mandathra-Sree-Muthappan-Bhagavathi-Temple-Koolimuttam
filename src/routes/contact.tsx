@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { MapPin, Phone, Mail, Clock, MessageCircle } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, MessageCircle, Shield } from "lucide-react";
 import { PageHero } from "@/components/temple/PageHero";
 import { SectionHeading } from "@/components/temple/SectionHeading";
 import templeExterior from "@/assets/temple-exterior.png";
@@ -28,17 +28,38 @@ function ContactPage() {
   const items = [
     {
       icon: MapPin,
-      ml: "സ്ഥലം",
-      label: "Location",
-      value: "Mandathra, Thrissur District, Kerala — 680000",
+      ml: "സ്ഥലം (മേൽവിലാസം)",
+      label: "Address",
+      value: "മണ്ടത്ര ശ്രീ മുത്തപ്പൻ ഭഗവതി ക്ഷേത്രം, പി.ഒ. കൂളിമട്ടം, തൃശ്ശൂർ - 680691",
+      subtitle: "Mandathra Sree Muthappan Bhagavathi Temple, P.O. Koolimuttam, Thrissur - 680691",
     },
-    { icon: Phone, ml: "ഫോൺ", label: "Phone", value: "+91 00000 00000", href: "tel:+910000000000" },
+    {
+      icon: Shield,
+      ml: "രജിസ്റ്റർ നമ്പർ",
+      label: "Registration Info",
+      value: "രജിസ്റ്റർ നമ്പർ: 603/99",
+      subtitle: "Reg No: 603/99",
+    },
+    {
+      icon: Phone,
+      ml: "ഫോൺ (പ്രസിഡന്റ്)",
+      label: "President Phone",
+      value: "+91 90480 55144",
+      href: "tel:+919048055144",
+    },
+    {
+      icon: Phone,
+      ml: "ഫോൺ (സെക്രട്ടറി)",
+      label: "Secretary Phone",
+      value: "+91 94952 24141",
+      href: "tel:+919495224141",
+    },
     {
       icon: MessageCircle,
       ml: "വാട്സാപ്പ്",
       label: "WhatsApp",
-      value: "Chat with us",
-      href: "https://wa.me/910000000000",
+      value: "സെക്രട്ടറിയുമായി ചാറ്റ് ചെയ്യുക (Chat with Secretary)",
+      href: "https://wa.me/919495224141",
     },
     {
       icon: Mail,
@@ -86,6 +107,9 @@ function ContactPage() {
                       {it.label}
                     </p>
                     <p className="text-foreground text-base">{it.value}</p>
+                    {it.subtitle && (
+                      <p className="text-xs text-muted-foreground mt-1 font-malayalam">{it.subtitle}</p>
+                    )}
                   </div>
                 </div>
               );
