@@ -37,12 +37,12 @@ export function PageHero({ image, malayalam, english, subtitle }: Props) {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(212,175,55,0.12)_0%,transparent_60%)] pointer-events-none z-10" />
       
       <Particles count={16} />
-      <div className="relative z-20 h-full flex flex-col items-center justify-center text-center px-6">
+      <div className="relative z-20 h-full flex flex-col items-center justify-center text-center px-5 max-w-4xl mx-auto">
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9 }}
-          className="font-malayalam text-lg md:text-2xl text-gold/90 mb-4 glow-text"
+          className="font-malayalam text-fluid-h3 text-gold/90 mb-3.5 glow-text leading-tight"
         >
           {malayalam}
         </motion.p>
@@ -50,7 +50,7 @@ export function PageHero({ image, malayalam, english, subtitle }: Props) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.15 }}
-          className="font-display text-4xl md:text-6xl text-gradient-gold tracking-wide"
+          className="font-display text-fluid-hero text-gradient-gold tracking-wide font-bold"
         >
           {english}
         </motion.h1>
@@ -59,7 +59,7 @@ export function PageHero({ image, malayalam, english, subtitle }: Props) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.4 }}
-            className="mt-5 max-w-2xl text-foreground/75 text-sm md:text-base"
+            className="mt-5 max-w-2xl text-foreground/75 text-fluid-body px-2 leading-relaxed"
           >
             {subtitle}
           </motion.p>

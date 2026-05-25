@@ -80,7 +80,7 @@ function GalleryPage() {
               transition={{ duration: 0.7, delay: (i % 3) * 0.08 }}
               onClick={() => setActiveIdx(i)}
               className={`group relative overflow-hidden rounded-sm border border-gold/15 bg-card/65 cursor-pointer glow-lamp transition-all duration-500 hover:border-gold/40 hover:-translate-y-1 ${
-                it.span === "tall" ? "row-span-2" : it.span === "wide" ? "col-span-2" : ""
+                it.span === "tall" ? "sm:row-span-2" : it.span === "wide" ? "sm:col-span-2" : ""
               }`}
             >
               {/* Blurred background copy for portrait items */}
@@ -126,11 +126,11 @@ function GalleryPage() {
 
             <div className="relative z-10 max-w-5xl w-full flex flex-col items-center">
               {/* Top Bar controls */}
-              <div className="w-full flex justify-between items-center text-muted-foreground text-xs uppercase tracking-[0.25em] mb-4">
+              <div className="w-full flex justify-between items-center text-muted-foreground text-xs uppercase tracking-[0.2em] sm:tracking-[0.25em] mb-4">
                 <span>Image {activeIdx + 1} of {items.length}</span>
                 <button
                   onClick={() => setActiveIdx(null)}
-                  className="p-2 text-gold hover:text-foreground hover:bg-gold/10 rounded-full transition-all"
+                  className="w-12 h-12 flex items-center justify-center text-gold hover:text-foreground hover:bg-gold/10 rounded-full transition-all shrink-0 cursor-pointer"
                   aria-label="Close Lightbox"
                 >
                   <X className="w-5 h-5" />
@@ -138,16 +138,7 @@ function GalleryPage() {
               </div>
 
               {/* Main image container */}
-              <div className="relative w-full flex items-center justify-between gap-4">
-                {/* Prev Button */}
-                <button
-                  onClick={() => setActiveIdx((activeIdx - 1 + items.length) % items.length)}
-                  className="p-3 text-gold hover:text-foreground hover:bg-gold/10 rounded-full shrink-0 transition-all cursor-pointer"
-                  aria-label="Previous Image"
-                >
-                  <ChevronLeft className="w-6 h-6" />
-                </button>
-
+              <div className="relative w-full flex items-center justify-center">
                 {/* Main Card with gold border */}
                 <motion.div
                   key={activeIdx}
@@ -155,24 +146,33 @@ function GalleryPage() {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.4 }}
-                  className="w-full aspect-[4/3] max-h-[70vh] rounded-sm overflow-hidden border border-gold/25 bg-card/90 shadow-2xl relative"
+                  className="w-full aspect-[4/3] sm:aspect-[16/10] max-h-[60vh] sm:max-h-[70vh] rounded-sm overflow-hidden border border-gold/25 bg-card/90 shadow-2xl relative"
                 >
                   <div className="absolute inset-0 bg-cover bg-center blur-xl opacity-35" style={{ backgroundImage: `url(${items[activeIdx].src})` }} />
                   <img
                     src={items[activeIdx].src}
                     alt={items[activeIdx].alt}
-                    className="relative z-10 w-full h-full object-contain p-4"
+                    className="relative z-10 w-full h-full object-contain p-4 sm:p-6"
                   />
-                </motion.div>
 
-                {/* Next Button */}
-                <button
-                  onClick={() => setActiveIdx((activeIdx + 1) % items.length)}
-                  className="p-3 text-gold hover:text-foreground hover:bg-gold/10 rounded-full shrink-0 transition-all cursor-pointer"
-                  aria-label="Next Image"
-                >
-                  <ChevronRight className="w-6 h-6" />
-                </button>
+                  {/* Prev Button Overlay */}
+                  <button
+                    onClick={() => setActiveIdx((activeIdx - 1 + items.length) % items.length)}
+                    className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-30 w-12 h-12 flex items-center justify-center text-gold hover:text-foreground bg-black/40 hover:bg-black/60 active:bg-black/80 rounded-full transition-all cursor-pointer backdrop-blur-sm border border-gold/15"
+                    aria-label="Previous Image"
+                  >
+                    <ChevronLeft className="w-6 h-6" />
+                  </button>
+
+                  {/* Next Button Overlay */}
+                  <button
+                    onClick={() => setActiveIdx((activeIdx + 1) % items.length)}
+                    className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-30 w-12 h-12 flex items-center justify-center text-gold hover:text-foreground bg-black/40 hover:bg-black/60 active:bg-black/80 rounded-full transition-all cursor-pointer backdrop-blur-sm border border-gold/15"
+                    aria-label="Next Image"
+                  >
+                    <ChevronRight className="w-6 h-6" />
+                  </button>
+                </motion.div>
               </div>
 
               {/* Caption */}
@@ -181,12 +181,12 @@ function GalleryPage() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.15 }}
-                className="mt-6 text-center max-w-2xl"
+                className="mt-6 text-center max-w-2xl px-4"
               >
                 <p className="font-malayalam text-gold/90 text-sm tracking-wide leading-relaxed">
                   {items[activeIdx].alt}
                 </p>
-                <p className="text-[10px] text-muted-foreground uppercase tracking-[0.2em] mt-2">
+                <p className="text-[10px] text-muted-foreground uppercase tracking-[0.2em] mt-2 hidden sm:block">
                   Use ← / → arrows to navigate
                 </p>
               </motion.div>

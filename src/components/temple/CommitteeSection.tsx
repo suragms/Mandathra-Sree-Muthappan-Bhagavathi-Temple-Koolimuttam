@@ -204,16 +204,16 @@ export function CommitteeSection({ showTitle = true }: CommitteeSectionProps) {
             <motion.div
               key={member.id}
               variants={cardVariants}
-              className="lg:col-span-3 flex justify-center mb-4"
+              className="md:col-span-2 lg:col-span-3 flex justify-center mb-4"
             >
-              <div className="w-full max-w-md glass-sacred p-6 rounded-sm relative overflow-hidden border border-gold/30 hover:border-gold/60 transition-all duration-500 hover:shadow-[0_0_30px_rgba(212,175,55,0.15)] group">
+              <div className="w-full max-w-md glass-sacred p-5 sm:p-6 rounded-sm relative overflow-hidden border border-gold/30 hover:border-gold/60 transition-all duration-500 hover:shadow-[0_0_30px_rgba(212,175,55,0.15)] group">
                 <div className="absolute -top-12 -right-12 w-24 h-24 bg-gold/5 rounded-full blur-xl group-hover:bg-gold/10 transition-all duration-500" />
                 <div className="flex items-start gap-4">
                   <div className="p-3 rounded-full bg-gold/10 text-gold border border-gold/25 group-hover:scale-110 transition-transform duration-500">
                     <Award className="w-6 h-6" />
                   </div>
                   <div className="space-y-2 flex-1">
-                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gold/15 text-gold border border-gold/30">
+                    <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-medium bg-gold/15 text-gold border border-gold/30">
                       {member.roleMl} / {member.roleEn}
                     </span>
                     <h4 className="font-malayalam text-lg md:text-xl text-gradient-gold font-bold">
@@ -254,7 +254,7 @@ export function CommitteeSection({ showTitle = true }: CommitteeSectionProps) {
                     <Shield className="w-5 h-5" />
                   </div>
                   <div className="space-y-2 flex-1">
-                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gold/10 text-gold border border-gold/20">
+                    <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-medium bg-gold/10 text-gold border border-gold/20">
                       {member.roleMl} / {member.roleEn}
                     </span>
                     <h4 className="font-malayalam text-lg text-gradient-gold font-bold">
@@ -295,7 +295,7 @@ export function CommitteeSection({ showTitle = true }: CommitteeSectionProps) {
                     <Shield className="w-5 h-5" />
                   </div>
                   <div className="space-y-2 flex-1">
-                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gold/10 text-gold border border-gold/20">
+                    <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-medium bg-gold/10 text-gold border border-gold/20">
                       {member.roleMl} / {member.roleEn}
                     </span>
                     <h4 className="font-malayalam text-lg text-gradient-gold font-bold">

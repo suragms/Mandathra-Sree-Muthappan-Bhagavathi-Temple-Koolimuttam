@@ -71,7 +71,7 @@ function Hero() {
   return (
     <section
       ref={ref}
-      className="relative h-[100svh] min-h-[680px] w-full overflow-hidden vignette smoke-overlay"
+      className="relative h-[100dvh] min-h-[640px] w-full overflow-hidden vignette smoke-overlay"
     >
       <motion.div style={{ y }} className="absolute inset-0">
         <div
@@ -86,13 +86,13 @@ function Hero() {
 
       <motion.div
         style={{ opacity }}
-        className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6"
+        className="relative z-10 h-full flex flex-col items-center justify-center text-center px-5 max-w-5xl mx-auto"
       >
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 0.2 }}
-          className="font-malayalam text-3xl sm:text-5xl md:text-6xl text-gradient-gold leading-[1.25] glow-text"
+          className="font-malayalam text-fluid-hero text-gradient-gold leading-[1.25] glow-text font-bold"
         >
           മണ്ടത്ര ശ്രീ മുത്തപ്പൻ
           <br />
@@ -103,7 +103,7 @@ function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.4 }}
-          className="mt-6 font-display text-base sm:text-xl tracking-[0.25em] text-gold/90 uppercase"
+          className="mt-6 font-display text-fluid-h3 tracking-wider text-gold/90 uppercase font-medium max-w-2xl px-2"
         >
           Mandathra Sree Muthappan Bhagavathi Temple
         </motion.h2>
@@ -112,7 +112,7 @@ function Hero() {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.6 }}
-          className="mt-2 font-display text-[10px] sm:text-xs tracking-[0.45em] text-foreground/60 uppercase"
+          className="mt-3 font-display text-xs sm:text-sm tracking-[0.35em] text-foreground/60 uppercase"
         >
           MANDATHRA KSHETHRAM
         </motion.p>
@@ -121,40 +121,42 @@ function Hero() {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 0.8, ease: "easeOut" }}
-          className="mt-8 flex items-center gap-3"
+          className="mt-8 flex items-center justify-center gap-2 sm:gap-3 w-full px-4"
         >
-          <span className="h-px w-10 sm:w-16 bg-gold/30" />
-          <span className="font-display text-[11px] sm:text-sm tracking-[0.4em] text-muted-foreground uppercase">
+          <span className="h-px w-4 sm:w-16 bg-gold/20" />
+          <span className="font-display text-[9px] sm:text-xs tracking-[0.2em] sm:tracking-[0.3em] text-muted-foreground uppercase whitespace-nowrap">
             Koolimuttam · Thrissur
           </span>
-          <span className="h-px w-10 sm:w-16 bg-gold/30" />
+          <span className="h-px w-4 sm:w-16 bg-gold/20" />
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 1.0 }}
-          className="mt-12 flex flex-wrap items-center justify-center gap-3"
+          className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 w-full max-w-md sm:max-w-xl px-2 mx-auto"
         >
           <Link
             to="/about"
-            className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-full gradient-gold text-background font-medium text-sm tracking-wide glow-lamp transition-transform hover:scale-[1.03]"
+            className="group inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full gradient-gold text-background font-medium text-sm tracking-wide glow-lamp transition-transform hover:scale-[1.03] w-full sm:w-auto min-h-[48px]"
           >
             Explore Temple
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
           </Link>
           <Link
             to="/gallery"
-            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-gold/40 text-gold text-sm font-medium tracking-wide hover:bg-gold/10 transition-colors"
+            className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full border border-gold/40 text-gold text-sm font-medium tracking-wide hover:bg-gold/10 transition-colors w-full sm:w-auto min-h-[48px]"
           >
             Festival Gallery
           </Link>
-          <Link
-            to="/contact"
-            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-foreground/80 text-sm tracking-wide hover:text-gold transition-colors"
+          <a
+            href="https://share.google/ykFbz9xgrCEjdyXmx"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full text-foreground/80 hover:text-gold text-sm tracking-wide transition-colors w-full sm:w-auto min-h-[48px]"
           >
             <MapPin className="w-4 h-4" /> Get Directions
-          </Link>
+          </a>
         </motion.div>
       </motion.div>
 
@@ -174,8 +176,8 @@ function Hero() {
 /* --------------------------- INTRODUCTION --------------------------- */
 function Introduction() {
   return (
-    <section className="relative py-28 px-6 md:px-8 max-w-7xl mx-auto">
-      <div className="grid lg:grid-cols-2 gap-16 items-center">
+    <section className="relative py-16 sm:py-28 px-6 md:px-8 max-w-7xl mx-auto">
+      <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
         <motion.div
           initial={{ opacity: 0, x: -30 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -257,7 +259,7 @@ function AboutMuthappan() {
   ];
 
   return (
-    <section className="relative py-28 overflow-hidden">
+    <section className="relative py-16 sm:py-28 overflow-hidden">
       <div
         className="absolute inset-0 opacity-[0.08] bg-cover bg-center filter grayscale contrast-125"
         style={{ backgroundImage: `url(${innerSanctumKalam})` }}
@@ -272,7 +274,7 @@ function AboutMuthappan() {
           description="A god of the people, Muthappan refuses palaces and gold. He chooses the company of the poor, the hunter, the toddy-tapper — walking beside them as friend, protector, and divine kin."
         />
 
-        <div className="mt-20 grid md:grid-cols-3 gap-6">
+        <div className="mt-12 sm:mt-20 grid grid-cols-1 md:grid-cols-3 gap-6">
           {pillars.map((p, i) => (
             <motion.div
               key={p.title}
@@ -301,8 +303,8 @@ function AboutMuthappan() {
 /* --------------------------- THEYYAM EXPERIENCE --------------------------- */
 function TheyyamExperience() {
   return (
-    <section className="relative py-28 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 md:px-8 grid lg:grid-cols-2 gap-16 items-center">
+    <section className="relative py-16 sm:py-28 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 md:px-8 grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -381,7 +383,7 @@ function Offerings() {
 
   return (
     <section
-      className="relative py-28 overflow-hidden"
+      className="relative py-16 sm:py-28 overflow-hidden"
       style={{ backgroundImage: `linear-gradient(180deg, var(--background), var(--card), var(--background))` }}
     >
       <div className="absolute inset-0 opacity-[0.22]">
@@ -397,7 +399,7 @@ function Offerings() {
           description="Each offering carries a prayer, a vow, a quiet bargain with the divine. At Muthappan's feet, the simplest gift carries the same weight as the grandest."
         />
 
-        <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="mt-10 sm:mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {items.map((it, i) => (
             <motion.div
               key={it.en}
@@ -427,35 +429,36 @@ function Offerings() {
 /* --------------------------- FESTIVAL --------------------------- */
 function FestivalHighlight() {
   return (
-    <section className="relative py-28 px-6 md:px-8">
-      <div className="max-w-7xl mx-auto relative rounded-sm overflow-hidden border border-gold/15 vignette">
-        <div className="aspect-[16/8] sm:aspect-[16/7]">
+    <section className="relative py-16 sm:py-28 px-6 md:px-8">
+      <div className="max-w-7xl mx-auto relative rounded-sm overflow-hidden border border-gold/15 vignette bg-card/25 flex flex-col md:block">
+        <div className="relative md:absolute md:inset-0 w-full aspect-[16/9] md:aspect-auto md:h-full">
           <img
             src={templeCourtyardLandscape}
             alt="Mandathra temple courtyard during festival preparations"
-            className="w-full h-full object-cover object-[center_30%] animate-slow-zoom brightness-90"
+            className="w-full h-full object-cover object-[center_30%] md:animate-slow-zoom brightness-[0.6] md:brightness-[0.8]"
             loading="lazy"
           />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent md:hidden" />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-background/45 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-background/45 to-transparent hidden md:block" />
 
-        <div className="absolute inset-0 flex items-center px-8 md:px-16">
+        <div className="relative z-10 flex items-center p-6 sm:p-10 md:p-16 md:min-h-[400px] lg:min-h-[460px]">
           <div className="max-w-xl">
-            <p className="font-display text-[11px] tracking-[0.5em] text-gold/80 mb-3 uppercase">
+            <p className="font-display text-[10px] sm:text-[11px] tracking-[0.4em] sm:tracking-[0.5em] text-gold/80 mb-3 uppercase">
               ✦ Annual Festival ✦
             </p>
-            <p className="font-malayalam text-base text-muted-foreground mb-2">വാർഷിക ഉത്സവം</p>
-            <h2 className="font-display text-3xl md:text-5xl text-gradient-gold leading-[1.15] mb-5">
+            <p className="font-malayalam text-sm sm:text-base text-muted-foreground mb-1 sm:mb-2">വാർഷിക ഉത്സവം</p>
+            <h2 className="font-display text-2xl sm:text-3xl md:text-5xl text-gradient-gold leading-[1.15] mb-4 sm:mb-5">
               Nights of Lamp & Drum
             </h2>
-            <p className="text-foreground/80 leading-relaxed mb-6 text-sm md:text-base">
+            <p className="text-foreground/80 leading-relaxed mb-6 text-sm sm:text-base">
               Each year, the Madappura erupts into days of ritual — Theyyam through the night,
               processions of caparisoned elephants, drumming that shakes the soil, and a sea of
               devotees united under one sacred sky.
             </p>
             <Link
               to="/festivals"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-gold/40 text-gold text-sm font-medium tracking-wide hover:bg-gold/10 transition-colors"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full border border-gold/40 text-gold text-sm font-medium tracking-wide hover:bg-gold/10 transition-colors w-full sm:w-auto min-h-[48px]"
             >
               View festival calendar
               <ArrowRight className="w-4 h-4" />
@@ -478,13 +481,13 @@ function GalleryPreview() {
     { src: templeExteriorPortrait, alt: "Main Sreekovil vertical shot" }
   ];
   return (
-    <section className="relative py-28 max-w-7xl mx-auto px-6 md:px-8">
+    <section className="relative py-16 sm:py-28 max-w-7xl mx-auto px-6 md:px-8">
       <SectionHeading
         eyebrow="Gallery"
         malayalam="ചിത്രങ്ങൾ"
         title="Moments Touched by the Sacred"
       />
-      <div className="mt-16 grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+      <div className="mt-10 sm:mt-16 grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
         {imgs.map((img, i) => (
           <motion.div
             key={i}
@@ -493,7 +496,7 @@ function GalleryPreview() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: i * 0.07 }}
             className={`relative overflow-hidden rounded-sm border border-gold/10 group bg-card/45 ${
-              i === 0 || i === 4 ? "row-span-2 aspect-[3/4]" : "aspect-square"
+              i === 0 || i === 4 ? "md:row-span-2 md:aspect-[3/4] aspect-square" : "aspect-square"
             }`}
           >
             {(i === 0 || i === 4 || i === 2 || i === 5) ? (
@@ -548,14 +551,14 @@ function Testimonials() {
   ];
 
   return (
-    <section className="relative py-28 px-6 md:px-8">
+    <section className="relative py-16 sm:py-28 px-6 md:px-8">
       <div className="max-w-7xl mx-auto">
         <SectionHeading
           eyebrow="Voices of Devotion"
           malayalam="ഭക്തരുടെ വാക്കുകൾ"
           title="Whispers from the Madappura"
         />
-        <div className="mt-16 grid md:grid-cols-3 gap-6">
+        <div className="mt-10 sm:mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
           {items.map((t, i) => (
             <motion.blockquote
               key={i}
@@ -593,29 +596,29 @@ function Timings() {
   ];
 
   return (
-    <section className="relative py-28 px-6 md:px-8">
+    <section className="relative py-16 sm:py-28 px-6 md:px-8">
       <div className="max-w-4xl mx-auto">
         <SectionHeading
           eyebrow="Daily Rituals"
           malayalam="ക്ഷേത്ര സമയം"
           title="Temple Timings"
         />
-        <div className="mt-14 glass-sacred rounded-sm overflow-hidden">
+        <div className="mt-10 sm:mt-14 glass-sacred rounded-sm overflow-hidden">
           {rows.map((r, i) => (
             <div
               key={r.en}
-              className={`flex items-center justify-between gap-6 px-6 sm:px-8 py-5 ${
+              className={`flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-6 px-4 sm:px-8 py-4 sm:py-5 ${
                 i !== rows.length - 1 ? "border-b border-gold/10" : ""
               }`}
             >
-              <div className="flex items-center gap-4">
-                <Clock className="w-4 h-4 text-gold shrink-0" />
+              <div className="flex items-center gap-3 sm:gap-4">
+                <Clock className="w-4.5 h-4.5 text-gold shrink-0" />
                 <div>
-                  <p className="font-malayalam text-sm text-gold/80">{r.ml}</p>
-                  <p className="font-display text-sm tracking-wider text-foreground">{r.en}</p>
+                  <p className="font-malayalam text-xs sm:text-sm text-gold/80">{r.ml}</p>
+                  <p className="font-display text-sm sm:text-base tracking-wider text-foreground">{r.en}</p>
                 </div>
               </div>
-              <div className="font-display text-xs sm:text-sm tracking-[0.18em] text-muted-foreground text-right">
+              <div className="font-display text-xs sm:text-sm tracking-wider sm:tracking-[0.18em] text-muted-foreground pl-7 sm:pl-0 sm:text-right">
                 {r.time}
               </div>
             </div>
@@ -629,14 +632,14 @@ function Timings() {
 /* --------------------------- CONTACT STRIP --------------------------- */
 function ContactStrip() {
   return (
-    <section className="relative py-28 px-6 md:px-8">
+    <section className="relative py-16 sm:py-28 px-6 md:px-8">
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-10 items-stretch">
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.9 }}
-          className="glass-sacred rounded-sm p-10"
+          className="glass-sacred rounded-sm p-6 sm:p-10"
         >
           <p className="font-display text-[11px] tracking-[0.5em] text-gold/80 mb-3 uppercase">
             ✦ Visit ✦
