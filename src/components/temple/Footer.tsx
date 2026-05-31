@@ -1,58 +1,71 @@
 import { Link } from "@tanstack/react-router";
-import { Phone, MapPin, Mail } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 import { TempleLogo } from "@/components/temple/TempleLogo";
+import { temple } from "@/lib/temple-data";
+
+const quickLinks = [
+  { to: "/about", label: "About Temple" },
+  { to: "/administration", label: "Committee Members" },
+  { to: "/festivals", label: "Festivals" },
+  { to: "/gallery", label: "Gallery" },
+  { to: "/contact", label: "Contact" },
+] as const;
 
 export function Footer() {
   return (
-    <footer className="relative mt-32 border-t border-gold/15 bg-background">
-      <div className="ornate-divider" />
-      <div className="max-w-7xl mx-auto px-6 md:px-8 py-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-        <div className="sm:col-span-2">
-          <TempleLogo variant="horizontal" className="mb-5" />
-          <p className="text-sm text-muted-foreground max-w-md leading-relaxed">
-            A sacred Koolimuttam temple rooted in Kerala's spiritual soil, where Muthappan walks among
-            devotees as the divine protector of the humble.
-          </p>
-        </div>
+    <footer className="mt-20 border-t border-gold/30 bg-[#4f0606] text-white">
+      <div className="kerala-border">
+        <div className="mx-auto grid max-w-7xl gap-10 px-6 py-14 md:grid-cols-[1.3fr_0.8fr_1fr] md:px-8">
+          <div>
+            <TempleLogo variant="horizontal" className="[&_*]:text-white [&_img]:bg-black" />
+            <p className="mt-5 max-w-lg text-sm leading-7 text-white/78">
+              A devotional Kerala temple space for Sree Muthappan and Bhagavathi, maintained by
+              the Mandathra temple committee with faith, service, and community care.
+            </p>
+            <p className="mt-4 font-malayalam text-sm text-gold">{temple.addressMl}</p>
+          </div>
 
-        <div>
-          <h4 className="font-display text-sm tracking-[0.25em] text-gold mb-4">VISIT</h4>
-          <ul className="space-y-3.5 text-sm text-muted-foreground">
-            <li><Link to="/about" className="hover:text-gold transition-colors py-1.5 block">About Temple</Link></li>
-            <li><Link to="/administration" className="hover:text-gold transition-colors py-1.5 block">Administration</Link></li>
-            <li><Link to="/theyyam" className="hover:text-gold transition-colors py-1.5 block">Theyyam Tradition</Link></li>
-            <li><Link to="/offerings" className="hover:text-gold transition-colors py-1.5 block">Vazhipadu</Link></li>
-            <li><Link to="/festivals" className="hover:text-gold transition-colors py-1.5 block">Festivals</Link></li>
-            <li><Link to="/gallery" className="hover:text-gold transition-colors py-1.5 block">Gallery</Link></li>
-          </ul>
-        </div>
+          <div>
+            <h2 className="font-display text-sm font-bold uppercase text-gold">Quick Links</h2>
+            <ul className="mt-5 grid gap-3 text-sm text-white/80">
+              {quickLinks.map((link) => (
+                <li key={link.to}>
+                  <Link to={link.to} className="hover:text-gold">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-        <div>
-          <h4 className="font-display text-sm tracking-[0.25em] text-gold mb-4">CONTACT</h4>
-          <ul className="space-y-4 text-sm text-muted-foreground">
-            <li className="flex gap-3 items-start">
-              <MapPin className="w-5 h-5 text-gold shrink-0 mt-0.5" />
-              <span className="leading-relaxed">Mandathra, Koolimuttam, Thrissur - 680691</span>
-            </li>
-            <li className="flex gap-3 items-center">
-              <Phone className="w-5 h-5 text-gold shrink-0" />
-              <a href="tel:+919495224141" className="hover:text-gold transition-colors py-1.5 block font-medium">+91 94952 24141 (Sec)</a>
-            </li>
-            <li className="flex gap-3 items-center">
-              <Mail className="w-5 h-5 text-gold shrink-0" />
-              <a href="mailto:info@mandathratemple.org" className="hover:text-gold transition-colors py-1.5 block">info@mandathratemple.org</a>
-            </li>
-            <li className="flex gap-3 items-center text-xs text-gold/60 pt-2.5 border-t border-gold/10">
-              <span>Reg No: 603/99</span>
-            </li>
-          </ul>
+          <div>
+            <h2 className="font-display text-sm font-bold uppercase text-gold">Contact</h2>
+            <ul className="mt-5 grid gap-4 text-sm text-white/80">
+              <li className="flex gap-3">
+                <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-gold" />
+                <span>{temple.addressEn}</span>
+              </li>
+              <li className="flex gap-3">
+                <Phone className="h-5 w-5 shrink-0 text-gold" />
+                <a href="tel:+919495224141" className="hover:text-gold">
+                  {temple.phoneSecretary}
+                </a>
+              </li>
+              <li className="flex gap-3">
+                <Mail className="h-5 w-5 shrink-0 text-gold" />
+                <a href={`mailto:${temple.email}`} className="hover:text-gold">
+                  {temple.email}
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
 
-      <div className="border-t border-gold/10 py-6 px-6 pb-[calc(env(safe-area-inset-bottom,0rem)+1.5rem)]">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-muted-foreground">
-          <p>© {new Date().getFullYear()} Mandathra Sree Muthappan Bhagavathi Temple</p>
-          <p className="font-malayalam tracking-wide">Designed with devotion · ഭക്തിയോടെ നിർമ്മിച്ചത്</p>
+      <div className="border-t border-white/10 px-6 py-5">
+        <div className="mx-auto flex max-w-7xl flex-col gap-2 text-xs text-white/65 sm:flex-row sm:items-center sm:justify-between">
+          <p>Copyright © {new Date().getFullYear()} {temple.nameEn}. All rights reserved.</p>
+          <p>Visitor counter: 60399 · Reg No: {temple.regNo}</p>
         </div>
       </div>
     </footer>

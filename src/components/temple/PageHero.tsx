@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Particles } from "./Particles";
+import { TempleLogo } from "./TempleLogo";
 
 interface Props {
   image: string;
@@ -9,61 +9,27 @@ interface Props {
 }
 
 export function PageHero({ image, malayalam, english, subtitle }: Props) {
-  const isPortrait = image.includes("portrait") || 
-                     image.includes("kalam") || 
-                     image.includes("lion") || 
-                     image.includes("kalvilakku") || 
-                     image.includes("APNQkAG") || 
-                     image.includes("APNQkAH") ||
-                     image.includes("w141");
-
   return (
-    <section className="relative h-[60vh] min-h-[420px] w-full overflow-hidden vignette smoke-overlay bg-card">
-      {/* Blurred background copy for small/portrait images */}
-      <div
-        className="absolute inset-0 bg-cover bg-center blur-md scale-105 opacity-40 animate-slow-zoom brightness-50"
-        style={{ backgroundImage: `url(${image})` }}
+    <section className="relative flex min-h-[440px] items-end overflow-hidden bg-temple-red pt-28 text-white">
+      <img
+        src={image}
+        alt=""
+        className="absolute inset-0 h-full w-full object-cover opacity-80"
+        loading="eager"
+        decoding="async"
       />
-      
-      {/* The main image, contained if portrait, covered if landscape */}
-      <div
-        className={`absolute inset-0 bg-center animate-slow-zoom ${
-          isPortrait ? "bg-contain py-4" : "bg-cover"
-        }`}
-        style={{ backgroundImage: `url(${image})` }}
-      />
-      
-      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-background/45 to-background/95 z-10" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(212,175,55,0.12)_0%,transparent_60%)] pointer-events-none z-10" />
-      
-      <Particles count={16} />
-      <div className="relative z-20 h-full flex flex-col items-center justify-center text-center px-5 max-w-4xl mx-auto">
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
+      <div className="absolute inset-0 hero-overlay" />
+      <div className="relative z-10 mx-auto grid w-full max-w-7xl gap-8 px-6 pb-16 md:grid-cols-[1fr_auto] md:items-end md:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9 }}
-          className="font-malayalam text-fluid-h3 text-gold/90 mb-3.5 glow-text leading-tight"
+          transition={{ duration: 0.75 }}
         >
-          {malayalam}
-        </motion.p>
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.15 }}
-          className="font-display text-fluid-hero text-gradient-gold tracking-wide font-bold"
-        >
-          {english}
-        </motion.h1>
-        {subtitle && (
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.4 }}
-            className="mt-5 max-w-2xl text-foreground/75 text-fluid-body px-2 leading-relaxed"
-          >
-            {subtitle}
-          </motion.p>
-        )}
+          <p className="font-malayalam text-xl font-bold text-gold md:text-2xl">{malayalam}</p>
+          <h1 className="mt-2 font-display text-fluid-hero font-bold">{english}</h1>
+          {subtitle && <p className="mt-5 max-w-2xl text-fluid-body text-white/86">{subtitle}</p>}
+        </motion.div>
+        <TempleLogo variant="icon" className="hidden h-24 w-24 md:block" />
       </div>
     </section>
   );

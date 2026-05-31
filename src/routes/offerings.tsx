@@ -3,21 +3,17 @@ import { motion } from "framer-motion";
 import { Flame } from "lucide-react";
 import { PageHero } from "@/components/temple/PageHero";
 import { SectionHeading } from "@/components/temple/SectionHeading";
-import innerSanctumKalam from "@/assets/inner-sanctum-kalam.png";
+import { media } from "@/lib/temple-data";
 
 export const Route = createFileRoute("/offerings")({
   head: () => ({
     meta: [
-      { title: "Vazhipadu — Sacred Offerings | Mandathra Temple" },
+      { title: "Offerings | Mandathra Temple" },
       {
         name: "description",
-        content:
-          "Traditional vazhipadu offerings at Mandathra Sree Muthappan Bhagavathi Temple — Coconut Offering, Lamp Offering, Special Pooja, and Prasadam.",
+        content: "Vazhipadu and devotional offerings at Mandathra Sree Muthappan Bhagavathi Temple.",
       },
-      { property: "og:title", content: "Vazhipadu — Sacred Offerings" },
-      { property: "og:description", content: "Traditional offerings at Mandathra Madappura." },
-      { property: "og:image", content: innerSanctumKalam },
-      { name: "twitter:image", content: innerSanctumKalam },
+      { property: "og:image", content: media.innerSanctum },
     ],
     links: [{ rel: "canonical", href: "/offerings" }],
   }),
@@ -26,101 +22,45 @@ export const Route = createFileRoute("/offerings")({
 
 function OfferingsPage() {
   const offerings = [
-    {
-      ml: "തേങ്ങ സമർപ്പണം",
-      en: "Coconut Offering",
-      desc: "Whole coconut broken at the threshold — surrender of ego, opening of heart.",
-      tag: "Daily",
-    },
-    {
-      ml: "വിളക്ക് നേർച്ച",
-      en: "Lamp Offering",
-      desc: "Lighting of oil lamps at dusk — invoking divine light, peace, and hope in life.",
-      tag: "Daily",
-    },
-    {
-      ml: "പൂജ സമർപ്പണം",
-      en: "Special Pooja",
-      desc: "Special archana and pooja for vows, healing, and gratitude — performed by the temple's senior priests.",
-      tag: "By request",
-    },
-    {
-      ml: "പ്രസാദം വിതരണം",
-      en: "Prasadam Offering",
-      desc: "Sacred payasam and temple prasadam distributed to all who enter the temple gates.",
-      tag: "Daily",
-    },
-    {
-      ml: "പായസ നിവേദ്യം",
-      en: "Payasa Nivedyam",
-      desc: "Sweet rice pudding cooked with jaggery and coconut milk, offered to the deities.",
-      tag: "Ritual",
-    },
-    {
-      ml: "ദീപാരാധന",
-      en: "Deeparadhana",
-      desc: "Lamp ritual at twilight — the sacred fire offered back to its source as the sky darkens.",
-      tag: "Evening",
-    },
+    ["തേങ്ങ സമർപ്പണം", "Coconut Offering", "A simple act of surrender and prayer."],
+    ["വിളക്ക് നേർച്ച", "Lamp Offering", "Lighting the lamp for hope, clarity, and blessing."],
+    ["ഭഗവതി പൂജ", "Bhagavathi Pooja", "Special worship for Devi's grace and protection."],
+    ["പ്രസാദം", "Prasadam Offering", "Sacred prasadam support for devotees and festival days."],
+    ["പായസ നിവേദ്യം", "Payasa Nivedyam", "Traditional sweet offering made with devotion."],
+    ["ദീപാരാധന", "Deeparadhana", "Evening lamp worship in the temple atmosphere."],
   ];
 
   return (
     <>
       <PageHero
-        image={innerSanctumKalam}
+        image={media.innerSanctum}
         malayalam="വഴിപാട്"
         english="Sacred Offerings"
-        subtitle="Each gift carries a vow. Each vow, a quiet conversation with the divine."
+        subtitle="Devotional support for daily pooja, special rituals, and festival worship."
       />
-
-      <section className="relative py-24 px-6 md:px-8 max-w-7xl mx-auto">
+      <section className="mx-auto max-w-7xl px-6 py-20 md:px-8">
         <SectionHeading
           eyebrow="Vazhipadu"
-          malayalam="ഭക്തിയുടെ ദാനം"
-          title="Offerings of the Madappura"
-          description="At Muthappan's feet, the smallest gift carries the same weight as the grandest. What matters is the heart that brings it."
+          malayalam="ഭക്തിയുടെ സമർപ്പണം"
+          title="Offerings for prayer, gratitude, and blessing"
         />
-
-        <div className="mt-16 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {offerings.map((o, i) => (
-            <motion.div
-              key={o.en}
-              initial={{ opacity: 0, y: 30 }}
+        <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {offerings.map(([ml, title, desc], index) => (
+            <motion.article
+              key={title}
+              initial={{ opacity: 0, y: 18 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.08 }}
-              className="group p-7 glass-sacred rounded-sm hover:border-gold/40 hover:-translate-y-1 transition-all duration-500"
+              transition={{ duration: 0.5, delay: index * 0.05 }}
+              className="temple-card rounded-lg p-7"
             >
-              <div className="flex items-start justify-between mb-5">
-                <div className="w-11 h-11 rounded-full border border-gold/40 flex items-center justify-center group-hover:glow-lamp transition-all">
-                  <Flame className="w-5 h-5 text-gold" strokeWidth={1.5} />
-                </div>
-                <span className="text-[10px] tracking-[0.25em] uppercase text-gold/70 px-3 py-1 rounded-full border border-gold/20">
-                  {o.tag}
-                </span>
-              </div>
-              <p className="font-malayalam text-lg text-gold mb-1">{o.ml}</p>
-              <h3 className="font-display text-lg text-foreground tracking-wide mb-3">{o.en}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">{o.desc}</p>
-            </motion.div>
+              <Flame className="h-7 w-7 text-gold" />
+              <p className="mt-5 font-malayalam text-xl font-bold text-temple-red">{ml}</p>
+              <h2 className="mt-1 font-display text-lg font-bold">{title}</h2>
+              <p className="mt-4 leading-7 text-muted-foreground">{desc}</p>
+            </motion.article>
           ))}
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="mt-20 p-10 glass-sacred rounded-sm text-center"
-        >
-          <p className="font-malayalam text-xl text-gradient-gold mb-3 glow-text">
-            "ഭക്തിയിൽ വലുപ്പം ഇല്ല"
-          </p>
-          <p className="text-foreground/80 italic max-w-2xl mx-auto">
-            In devotion, there is no measure. A handful of rice from a poor man weighs the same
-            on Muthappan's scales as gold from a king.
-          </p>
-        </motion.div>
       </section>
     </>
   );

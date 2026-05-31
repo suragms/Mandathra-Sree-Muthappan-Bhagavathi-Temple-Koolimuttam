@@ -1,21 +1,18 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHero } from "@/components/temple/PageHero";
 import { CommitteeSection } from "@/components/temple/CommitteeSection";
-import templeCourtyardLandscape from "@/assets/temple-courtyard-landscape.png";
+import { media, temple } from "@/lib/temple-data";
 
 export const Route = createFileRoute("/administration")({
   head: () => ({
     meta: [
-      { title: "Temple Committee 2026 | Mandathra Sree Muthappan Bhagavathi Temple" },
+      { title: `Temple Committee 2026 | ${temple.nameEn}` },
       {
         name: "description",
         content:
-          "Official temple administration committee of Mandathra Sree Muthappan Bhagavathi Temple, Koolimuttam for the year 2026. Contact details of committee members.",
+          "Official temple administration committee, president, secretary, treasurer, and executive members of Mandathra Sree Muthappan Bhagavathi Temple Committee.",
       },
-      { property: "og:title", content: "Temple Committee 2026 — Mandathra Kshethram" },
-      { property: "og:description", content: "Official administration and committee details." },
-      { property: "og:image", content: templeCourtyardLandscape },
-      { name: "twitter:image", content: templeCourtyardLandscape },
+      { property: "og:image", content: media.hero },
     ],
     links: [{ rel: "canonical", href: "/administration" }],
   }),
@@ -26,14 +23,12 @@ function AdministrationPage() {
   return (
     <>
       <PageHero
-        image={templeCourtyardLandscape}
+        image={media.hero}
         malayalam="ക്ഷേത്ര ഭരണസമിതി"
-        english="Temple Administration"
-        subtitle="Reg No: 603/99 · Koolimuttam, Thrissur · ഭക്തിയോടെ ജനസേവനം"
+        english="Temple Committee"
+        subtitle={`Reg No: ${temple.regNo} · ${temple.addressMl}`}
       />
-      <section className="relative py-12">
-        <CommitteeSection showTitle={true} />
-      </section>
+      <CommitteeSection showTitle />
     </>
   );
 }

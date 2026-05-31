@@ -18,29 +18,29 @@ export function SectionHeading({
 }: Props) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 24 }}
+      initial={{ opacity: 0, y: 22 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.9, ease: "easeOut" }}
-      className={`max-w-2xl ${align === "center" ? "mx-auto text-center" : ""}`}
+      transition={{ duration: 0.7, ease: "easeOut" }}
+      className={`max-w-3xl ${align === "center" ? "mx-auto text-center" : ""}`}
     >
       {eyebrow && (
-        <p className="font-display text-[11px] tracking-[0.5em] text-gold/80 mb-4 uppercase">
-          ✦ {eyebrow} ✦
+        <p className="font-display text-[11px] font-bold uppercase text-temple-red">
+          {eyebrow}
         </p>
       )}
       {malayalam && (
-        <p className="font-malayalam text-base md:text-lg text-muted-foreground mb-3">
+        <p className="mt-2 font-malayalam text-base font-semibold text-gold md:text-lg">
           {malayalam}
         </p>
       )}
-      <h2 className="font-display text-3xl md:text-5xl text-gradient-gold leading-[1.15] mb-5">
+      <h2 className="mt-3 font-malayalam text-fluid-h2 font-bold text-temple-red">
         {title}
       </h2>
       {description && (
-        <p className="text-foreground/75 leading-relaxed text-base md:text-lg">{description}</p>
+        <p className="mt-5 text-fluid-body text-muted-foreground">{description}</p>
       )}
-      <div className={`mt-6 h-px ${align === "center" ? "mx-auto" : ""} w-24 ornate-divider`} />
+      <div className={`mt-7 h-px w-28 ornate-divider ${align === "center" ? "mx-auto" : ""}`} />
     </motion.div>
   );
 }

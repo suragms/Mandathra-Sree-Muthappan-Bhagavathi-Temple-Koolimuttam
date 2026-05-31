@@ -1,195 +1,126 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
-import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { useEffect, useState } from "react";
 import { PageHero } from "@/components/temple/PageHero";
-
-import templeExterior from "@/assets/temple-exterior.png";
-import templeExteriorPortrait from "@/assets/temple-exterior-portrait.png";
-import templeCourtyardLandscape from "@/assets/temple-courtyard-landscape.png";
-import innerSanctumKalam from "@/assets/inner-sanctum-kalam.png";
-import stoneLion from "@/assets/stone-lion.png";
-import kalvilakkuCourtyard from "@/assets/kalvilakku-courtyard.png";
+import { SectionHeading } from "@/components/temple/SectionHeading";
+import { galleryItems, media } from "@/lib/temple-data";
 
 export const Route = createFileRoute("/gallery")({
   head: () => ({
     meta: [
-      { title: "Gallery | Mandathra Sree Muthappan Temple" },
+      { title: "Gallery | Mandathra Sree Muthappan Bhagavathi Temple" },
       {
         name: "description",
         content:
-          "Photographs of Mandathra Sree Muthappan Bhagavathi Temple — Theyyam rituals, festival processions, sacred lamps, and devotional moments.",
+          "Modern masonry gallery of Mandathra Sree Muthappan Bhagavathi Temple photos, festivals, temple events, lamps, and Kerala devotional moments.",
       },
-      { property: "og:title", content: "Gallery — Mandathra" },
-      { property: "og:description", content: "Cinematic moments of Kerala temple devotion." },
-      { property: "og:image", content: templeExterior },
-      { name: "twitter:image", content: templeExterior },
+      { property: "og:title", content: "Mandathra Temple Gallery" },
+      { property: "og:image", content: media.hero },
     ],
     links: [{ rel: "canonical", href: "/gallery" }],
   }),
   component: GalleryPage,
 });
 
-const items = [
-  { src: templeExterior, alt: "Mandathra Temple Sreekovil shrine with golden decorations", span: "wide", ratio: "landscape" },
-  { src: innerSanctumKalam, alt: "Inner sanctum peedham decorated with kuruthola and colorful ritual kalam", span: "tall", ratio: "portrait" },
-  { src: templeExteriorPortrait, alt: "Main Sreekovil outer wall structure and red-tiled roof", span: "tall", ratio: "portrait" },
-  { src: kalvilakkuCourtyard, alt: "Traditional Kalvilakku stone lamp and outer pavilion lights", ratio: "portrait" },
-  { src: stoneLion, alt: "Gilded stone lion vahana (vehicle) of Bhagavathi Devi", span: "tall", ratio: "portrait" },
-  { src: templeCourtyardLandscape, alt: "Mandathra Temple courtyard wide landscape view", ratio: "landscape" },
-];
-
 function GalleryPage() {
-  const [activeIdx, setActiveIdx] = useState<number | null>(null);
+  const [active, setActive] = useState<number | null>(null);
 
-  // Keyboard navigation for lightbox
   useEffect(() => {
-    if (activeIdx === null) return;
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        setActiveIdx(null);
-      } else if (e.key === "ArrowRight") {
-        setActiveIdx((prev) => (prev !== null ? (prev + 1) % items.length : null));
-      } else if (e.key === "ArrowLeft") {
-        setActiveIdx((prev) => (prev !== null ? (prev - 1 + items.length) % items.length : null));
-      }
+    if (active === null) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setActive(null);
+      if (event.key === "ArrowRight") setActive((value) => (value === null ? null : (value + 1) % galleryItems.length));
+      if (event.key === "ArrowLeft") setActive((value) => (value === null ? null : (value - 1 + galleryItems.length) % galleryItems.length));
     };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [activeIdx]);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [active]);
 
   return (
     <>
       <PageHero
-        image={templeExterior}
+        image={media.entranceLamp}
         malayalam="ചിത്രങ്ങൾ"
         english="Gallery"
-        subtitle="Frames from the Madappura — devotion captured in lamplight."
+        subtitle="Temple events, festival moments, ritual spaces, and devotional Kerala architecture."
       />
 
-      <section className="relative py-20 px-4 md:px-8 max-w-7xl mx-auto">
-        <div
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 auto-rows-[280px]"
-        >
-          {items.map((it, i) => (
-            <motion.figure
-              key={i}
-              initial={{ opacity: 0, y: 30 }}
+      <section className="mx-auto max-w-7xl px-6 py-20 md:px-8">
+        <SectionHeading
+          eyebrow="Masonry Gallery"
+          malayalam="ഉത്സവവും ക്ഷേത്രവും"
+          title="Selected and optimized temple photographs"
+          description="Images are lazy-loaded and served from compressed WebP assets generated from the public media folder."
+        />
+        <div className="mt-12 grid auto-rows-[220px] grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4 md:auto-rows-[260px]">
+          {galleryItems.map((item, index) => (
+            <motion.button
+              key={item.src}
+              initial={{ opacity: 0, y: 18 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.7, delay: (i % 3) * 0.08 }}
-              onClick={() => setActiveIdx(i)}
-              className={`group relative overflow-hidden rounded-sm border border-gold/15 bg-card/65 cursor-pointer glow-lamp transition-all duration-500 hover:border-gold/40 hover:-translate-y-1 ${
-                it.span === "tall" ? "sm:row-span-2" : it.span === "wide" ? "sm:col-span-2" : ""
-              }`}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: (index % 4) * 0.05 }}
+              onClick={() => setActive(index)}
+              className={`group relative overflow-hidden rounded-lg bg-muted text-left shadow-sm ${
+                item.span === "wide" ? "sm:col-span-2" : ""
+              } ${item.span === "tall" ? "sm:row-span-2" : ""}`}
             >
-              {/* Blurred background copy for portrait items */}
-              {it.ratio === "portrait" && (
-                <div className="absolute inset-0 bg-cover bg-center blur-[8px] scale-105 opacity-30" style={{ backgroundImage: `url(${it.src})` }} />
-              )}
-              
               <img
-                src={it.src}
-                alt={it.alt}
-                className={`relative z-10 w-full h-full transition-transform duration-[2000ms] group-hover:scale-105 ${
-                  it.ratio === "portrait" ? "object-contain p-3" : "object-cover"
+                src={item.src}
+                alt={item.alt}
+                className={`h-full w-full transition-transform duration-700 group-hover:scale-105 ${
+                  item.contain ? "object-contain p-4" : "object-cover"
                 }`}
                 loading="lazy"
+                decoding="async"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/10 to-transparent opacity-80 group-hover:opacity-40 transition-opacity duration-500 z-20" />
-              <figcaption className="absolute bottom-0 inset-x-0 p-5 text-[11px] tracking-[0.2em] uppercase text-gold/90 font-medium z-30 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-                <span className="font-malayalam normal-case tracking-wide text-xs block text-foreground/80 mb-1">{it.alt}</span>
-                Click to expand
-              </figcaption>
-            </motion.figure>
+              <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 to-transparent p-4">
+                <span className="block text-xs font-bold uppercase text-gold">{item.category}</span>
+                <span className="mt-1 line-clamp-2 block text-sm font-semibold text-white">{item.alt}</span>
+              </span>
+            </motion.button>
           ))}
         </div>
       </section>
 
-      {/* Lightbox Modal */}
       <AnimatePresence>
-        {activeIdx !== null && (
+        {active !== null && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-background/95 backdrop-blur-sm p-4"
+            className="fixed inset-0 z-[70] flex items-center justify-center bg-black/92 p-4"
           >
-            {/* Background Image blur */}
-            <div
-              className="absolute inset-0 bg-cover bg-center blur-2xl opacity-20 scale-105"
-              style={{ backgroundImage: `url(${items[activeIdx].src})` }}
-            />
-            
-            {/* Close trigger clicking background */}
-            <div className="absolute inset-0 cursor-zoom-out" onClick={() => setActiveIdx(null)} />
-
-            <div className="relative z-10 max-w-5xl w-full flex flex-col items-center">
-              {/* Top Bar controls */}
-              <div className="w-full flex justify-between items-center text-muted-foreground text-xs uppercase tracking-[0.2em] sm:tracking-[0.25em] mb-4">
-                <span>Image {activeIdx + 1} of {items.length}</span>
-                <button
-                  onClick={() => setActiveIdx(null)}
-                  className="w-12 h-12 flex items-center justify-center text-gold hover:text-foreground hover:bg-gold/10 rounded-full transition-all shrink-0 cursor-pointer"
-                  aria-label="Close Lightbox"
-                >
-                  <X className="w-5 h-5" />
+            <button className="absolute inset-0 cursor-zoom-out" onClick={() => setActive(null)} aria-label="Close gallery image" />
+            <div className="relative z-10 w-full max-w-6xl">
+              <div className="mb-3 flex items-center justify-between text-white">
+                <p className="text-sm font-bold">{galleryItems[active].category} · {active + 1}/{galleryItems.length}</p>
+                <button onClick={() => setActive(null)} className="flex h-12 w-12 items-center justify-center rounded-full bg-white/10">
+                  <X className="h-6 w-6" />
                 </button>
               </div>
-
-              {/* Main image container */}
-              <div className="relative w-full flex items-center justify-center">
-                {/* Main Card with gold border */}
-                <motion.div
-                  key={activeIdx}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.4 }}
-                  className="w-full aspect-[4/3] sm:aspect-[16/10] max-h-[60vh] sm:max-h-[70vh] rounded-sm overflow-hidden border border-gold/25 bg-card/90 shadow-2xl relative"
+              <div className="relative overflow-hidden rounded-lg bg-white/5">
+                <img
+                  src={galleryItems[active].src}
+                  alt={galleryItems[active].alt}
+                  className="max-h-[75vh] w-full object-contain p-2"
+                />
+                <button
+                  onClick={() => setActive((active - 1 + galleryItems.length) % galleryItems.length)}
+                  className="absolute left-3 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-black/55 text-white"
+                  aria-label="Previous image"
                 >
-                  <div className="absolute inset-0 bg-cover bg-center blur-xl opacity-35" style={{ backgroundImage: `url(${items[activeIdx].src})` }} />
-                  <img
-                    src={items[activeIdx].src}
-                    alt={items[activeIdx].alt}
-                    className="relative z-10 w-full h-full object-contain p-4 sm:p-6"
-                  />
-
-                  {/* Prev Button Overlay */}
-                  <button
-                    onClick={() => setActiveIdx((activeIdx - 1 + items.length) % items.length)}
-                    className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-30 w-12 h-12 flex items-center justify-center text-gold hover:text-foreground bg-black/40 hover:bg-black/60 active:bg-black/80 rounded-full transition-all cursor-pointer backdrop-blur-sm border border-gold/15"
-                    aria-label="Previous Image"
-                  >
-                    <ChevronLeft className="w-6 h-6" />
-                  </button>
-
-                  {/* Next Button Overlay */}
-                  <button
-                    onClick={() => setActiveIdx((activeIdx + 1) % items.length)}
-                    className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-30 w-12 h-12 flex items-center justify-center text-gold hover:text-foreground bg-black/40 hover:bg-black/60 active:bg-black/80 rounded-full transition-all cursor-pointer backdrop-blur-sm border border-gold/15"
-                    aria-label="Next Image"
-                  >
-                    <ChevronRight className="w-6 h-6" />
-                  </button>
-                </motion.div>
+                  <ChevronLeft className="h-6 w-6" />
+                </button>
+                <button
+                  onClick={() => setActive((active + 1) % galleryItems.length)}
+                  className="absolute right-3 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-black/55 text-white"
+                  aria-label="Next image"
+                >
+                  <ChevronRight className="h-6 w-6" />
+                </button>
               </div>
-
-              {/* Caption */}
-              <motion.div
-                key={`caption-${activeIdx}`}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.15 }}
-                className="mt-6 text-center max-w-2xl px-4"
-              >
-                <p className="font-malayalam text-gold/90 text-sm tracking-wide leading-relaxed">
-                  {items[activeIdx].alt}
-                </p>
-                <p className="text-[10px] text-muted-foreground uppercase tracking-[0.2em] mt-2 hidden sm:block">
-                  Use ← / → arrows to navigate
-                </p>
-              </motion.div>
             </div>
           </motion.div>
         )}

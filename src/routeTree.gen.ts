@@ -9,7 +9,6 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as TheyyamRouteImport } from './routes/theyyam'
 import { Route as OfferingsRouteImport } from './routes/offerings'
 import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as FestivalsRouteImport } from './routes/festivals'
@@ -18,11 +17,6 @@ import { Route as AdministrationRouteImport } from './routes/administration'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 
-const TheyyamRoute = TheyyamRouteImport.update({
-  id: '/theyyam',
-  path: '/theyyam',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const OfferingsRoute = OfferingsRouteImport.update({
   id: '/offerings',
   path: '/offerings',
@@ -67,7 +61,6 @@ export interface FileRoutesByFullPath {
   '/festivals': typeof FestivalsRoute
   '/gallery': typeof GalleryRoute
   '/offerings': typeof OfferingsRoute
-  '/theyyam': typeof TheyyamRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -77,7 +70,6 @@ export interface FileRoutesByTo {
   '/festivals': typeof FestivalsRoute
   '/gallery': typeof GalleryRoute
   '/offerings': typeof OfferingsRoute
-  '/theyyam': typeof TheyyamRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -88,7 +80,6 @@ export interface FileRoutesById {
   '/festivals': typeof FestivalsRoute
   '/gallery': typeof GalleryRoute
   '/offerings': typeof OfferingsRoute
-  '/theyyam': typeof TheyyamRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -100,7 +91,6 @@ export interface FileRouteTypes {
     | '/festivals'
     | '/gallery'
     | '/offerings'
-    | '/theyyam'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -110,7 +100,6 @@ export interface FileRouteTypes {
     | '/festivals'
     | '/gallery'
     | '/offerings'
-    | '/theyyam'
   id:
     | '__root__'
     | '/'
@@ -120,7 +109,6 @@ export interface FileRouteTypes {
     | '/festivals'
     | '/gallery'
     | '/offerings'
-    | '/theyyam'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -131,18 +119,10 @@ export interface RootRouteChildren {
   FestivalsRoute: typeof FestivalsRoute
   GalleryRoute: typeof GalleryRoute
   OfferingsRoute: typeof OfferingsRoute
-  TheyyamRoute: typeof TheyyamRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/theyyam': {
-      id: '/theyyam'
-      path: '/theyyam'
-      fullPath: '/theyyam'
-      preLoaderRoute: typeof TheyyamRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/offerings': {
       id: '/offerings'
       path: '/offerings'
@@ -203,7 +183,6 @@ const rootRouteChildren: RootRouteChildren = {
   FestivalsRoute: FestivalsRoute,
   GalleryRoute: GalleryRoute,
   OfferingsRoute: OfferingsRoute,
-  TheyyamRoute: TheyyamRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
