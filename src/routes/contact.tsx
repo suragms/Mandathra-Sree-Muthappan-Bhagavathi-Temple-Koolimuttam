@@ -66,7 +66,7 @@ function ContactPage() {
               );
             })}
           </div>
-          <div className="min-h-[520px] overflow-hidden rounded-lg border border-gold/30 shadow-xl">
+          <div id="map" className="min-h-[520px] scroll-mt-28 overflow-hidden rounded-lg border border-gold/30 shadow-xl">
             <iframe
               title="Mandathra Sree Muthappan Bhagavathi Temple location"
               src="https://www.google.com/maps?q=Mandathra+Sree+Muthappan+Bhagavathi+Temple+Koolimuttam&output=embed"

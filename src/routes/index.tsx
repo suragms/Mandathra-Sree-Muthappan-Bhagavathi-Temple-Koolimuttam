@@ -6,6 +6,7 @@ import {
   CalendarDays,
   Download,
   Flame,
+  Gift,
   HeartHandshake,
   MapPin,
   MessageCircle,
@@ -55,23 +56,23 @@ const heroSlides = [
 ];
 
 const quickLinks = [
-  { to: "/about", label: "About Temple", icon: Sparkles },
-  { to: "/administration", label: "Committee Members", icon: Users },
-  { to: "/festivals", label: "Festivals", icon: CalendarDays },
-  { to: "/gallery", label: "Gallery", icon: Flame },
-  { to: "/festivals", label: "Announcements", icon: Bell },
-  { to: "/contact", label: "Contact", icon: Phone },
+  { href: "/festivals#makam-pooja", label: "Monthly Makam Pooja", icon: Sparkles },
+  { href: "/festivals#makam-ulsavam", label: "Annual Makam Ulsavam", icon: CalendarDays },
+  { href: "#donation", label: "Donations", icon: HeartHandshake },
+  { href: "/contact", label: "Contact Temple", icon: Phone },
 ] as const;
 
 function Home() {
   return (
     <>
       <Hero />
+      <TodayInfo />
       <QuickLinks />
       <AboutTemple />
       <FestivalSection />
       <CommitteePreview />
       <Announcements />
+      <UpcomingEvents />
       <GalleryPreview />
       <DonationSection />
       <ContactSection />
@@ -181,17 +182,67 @@ function Hero() {
 
 function QuickLinks() {
   return (
-    <section className="relative z-20 mx-auto -mt-12 max-w-7xl px-6 md:px-8">
-      <div className="grid gap-3 rounded-lg bg-white p-3 shadow-2xl shadow-black/10 sm:grid-cols-2 lg:grid-cols-6">
+    <section className="relative z-20 mx-auto max-w-7xl px-6 py-10 md:px-8">
+      <SectionHeading
+        eyebrow="Quick Access"
+        malayalam="വേഗത്തിൽ കാണുക"
+        title="Important temple services"
+      />
+      <div className="mt-8 grid gap-3 rounded-lg bg-white p-3 shadow-2xl shadow-black/10 sm:grid-cols-2 lg:grid-cols-4">
         {quickLinks.map((link) => (
-          <Link
-            key={`${link.to}-${link.label}`}
-            to={link.to}
+          <a
+            key={`${link.href}-${link.label}`}
+            href={link.href}
             className="group flex items-center gap-3 rounded-md border border-gold/25 bg-accent/55 p-4 text-temple-red transition-all hover:-translate-y-1 hover:bg-white hover:shadow-lg"
           >
             <link.icon className="h-5 w-5 shrink-0 text-gold" />
             <span className="text-sm font-bold">{link.label}</span>
-          </Link>
+          </a>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function TodayInfo() {
+  const today = new Intl.DateTimeFormat("ml-IN", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).format(new Date());
+
+  const cards = [
+    {
+      icon: CalendarDays,
+      label: "ഇന്നത്തെ തീയതി",
+      value: today,
+      note: "Daily temple information",
+    },
+    {
+      icon: Sparkles,
+      label: "അടുത്ത മകം",
+      value: "കമ്മിറ്റി അറിയിപ്പ് പ്രകാരം",
+      note: "Monthly Makam Pooja details",
+    },
+    {
+      icon: Flame,
+      label: "ക്ഷേത്ര സമയം",
+      value: "5:30 AM - 8:30 PM",
+      note: "Opening hours",
+    },
+  ];
+
+  return (
+    <section className="relative z-20 mx-auto -mt-10 max-w-7xl px-6 md:px-8">
+      <div className="grid gap-3 rounded-2xl border border-gold/25 bg-white p-3 shadow-2xl shadow-black/10 md:grid-cols-3">
+        {cards.map((card) => (
+          <article key={card.label} className="rounded-xl bg-accent/65 p-4">
+            <card.icon className="h-5 w-5 text-gold" />
+            <p className="mt-3 font-malayalam text-sm font-bold text-temple-red">{card.label}</p>
+            <p className="mt-1 font-malayalam text-lg font-bold text-foreground">{card.value}</p>
+            <p className="mt-1 text-xs text-muted-foreground">{card.note}</p>
+          </article>
         ))}
       </div>
     </section>
@@ -353,7 +404,7 @@ function CommitteePreview() {
 
 function Announcements() {
   return (
-    <section className="bg-accent py-24">
+    <section id="announcements" className="scroll-mt-28 bg-accent py-24">
       <div className="mx-auto max-w-7xl px-6 md:px-8">
         <SectionHeading
           eyebrow="Notice Board"
@@ -416,6 +467,51 @@ function GalleryPreview() {
   );
 }
 
+function UpcomingEvents() {
+  const items = [
+    {
+      icon: Sparkles,
+      title: "Monthly Makam Pooja",
+      ml: "മകം പൂജ",
+      desc: "Upcoming Makam date and pooja timings will be announced by the temple committee.",
+    },
+    {
+      icon: CalendarDays,
+      title: "Annual Makam Ulsavam",
+      ml: "മകം ഉത്സവം",
+      desc: "Festival schedule, gallery highlights, and announcements will appear here.",
+    },
+    {
+      icon: Gift,
+      title: "Annadanam & Offerings",
+      ml: "അന്നദാനം",
+      desc: "Devotees can contact the committee for offerings, donations, and support.",
+    },
+  ];
+
+  return (
+    <section className="sacred-band py-20">
+      <div className="mx-auto max-w-7xl px-6 md:px-8">
+        <SectionHeading
+          eyebrow="Upcoming Events"
+          malayalam="വരാനിരിക്കുന്ന ചടങ്ങുകൾ"
+          title="Temple calendar at a glance"
+        />
+        <div className="mt-10 grid gap-4 md:grid-cols-3">
+          {items.map((item) => (
+            <article key={item.title} className="temple-card rounded-lg p-6">
+              <item.icon className="h-7 w-7 text-gold" />
+              <p className="mt-4 font-malayalam text-lg font-bold text-temple-red">{item.ml}</p>
+              <h3 className="mt-1 font-display text-lg font-bold">{item.title}</h3>
+              <p className="mt-3 text-sm leading-6 text-muted-foreground">{item.desc}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function DonationSection() {
   return (
     <section id="donation" className="sacred-band py-24">
@@ -465,7 +561,7 @@ function ContactSection() {
             <a className="flex gap-3 font-bold text-temple-red" href={temple.whatsappUrl} target="_blank" rel="noopener noreferrer"><MessageCircle className="h-5 w-5 shrink-0 text-gold" /> WhatsApp Temple Secretary</a>
           </div>
         </div>
-        <div className="min-h-[420px] overflow-hidden rounded-lg border border-gold/30 shadow-xl">
+        <div id="map" className="min-h-[420px] scroll-mt-28 overflow-hidden rounded-lg border border-gold/30 shadow-xl">
           <iframe
             title="Mandathra Sree Muthappan Bhagavathi Temple Google Map"
             src="https://www.google.com/maps?q=Mandathra+Sree+Muthappan+Bhagavathi+Temple+Koolimuttam&output=embed"
@@ -481,14 +577,23 @@ function ContactSection() {
 
 function FloatingWhatsApp() {
   return (
-    <a
-      href={temple.whatsappUrl}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="floating-whatsapp fixed bottom-24 right-5 z-40 inline-flex h-14 w-14 items-center justify-center rounded-full bg-[#1fa855] text-white transition-transform hover:scale-105 sm:bottom-5"
-      aria-label="Contact Mandathra temple on WhatsApp"
-    >
-      <MessageCircle className="h-7 w-7" />
-    </a>
+    <div className="fixed bottom-24 right-4 z-40 flex flex-col gap-3 sm:bottom-5">
+      <a
+        href="tel:+919495224141"
+        className="floating-whatsapp inline-flex h-12 w-12 items-center justify-center rounded-full bg-temple-red text-white transition-transform hover:scale-105"
+        aria-label="Call Mandathra temple"
+      >
+        <Phone className="h-6 w-6" />
+      </a>
+      <a
+        href={temple.whatsappUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="floating-whatsapp inline-flex h-14 w-14 items-center justify-center rounded-full bg-[#1fa855] text-white transition-transform hover:scale-105"
+        aria-label="Contact Mandathra temple on WhatsApp"
+      >
+        <MessageCircle className="h-7 w-7" />
+      </a>
+    </div>
   );
 }

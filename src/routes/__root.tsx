@@ -154,7 +154,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <Navbar />
-      <main className="min-h-screen">
+      <main className="min-h-screen pb-24 lg:pb-0">
         <Outlet />
       </main>
       <Footer />

@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { CalendarDays, Flame, Gift, HandHeart, Sparkles } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
 import { PageHero } from "@/components/temple/PageHero";
 import { SectionHeading } from "@/components/temple/SectionHeading";
 import { media } from "@/lib/temple-data";
@@ -41,6 +42,9 @@ const annualHighlights = [
 ];
 
 function FestivalsPage() {
+  const monthlyCountdown = useTempleCountdown("monthly-makam");
+  const annualCountdown = useTempleCountdown("annual-ulsavam");
+
   return (
     <>
       <PageHero
@@ -50,13 +54,20 @@ function FestivalsPage() {
         subtitle="മലയാള മാസങ്ങളിലെ മകം നക്ഷത്ര ദിന പൂജകളും ക്ഷേത്രത്തിലെ പ്രധാന വാർഷിക മകം ഉത്സവവും."
       />
 
-      <section className="sacred-band py-20">
+      <section id="makam-pooja" className="sacred-band scroll-mt-28 py-20">
         <div className="mx-auto max-w-7xl px-6 md:px-8">
           <SectionHeading
             eyebrow="Makam Pooja"
             malayalam="മകം നക്ഷത്ര ദിനം"
             title="മാസംതോറും നടത്തുന്ന മകം പൂജ"
             description="ക്ഷേത്രത്തിൽ എല്ലാ മലയാള മാസങ്ങളിലെയും മകം നക്ഷത്ര ദിനത്തിൽ വിശേഷാൽ മകം പൂജയും പ്രത്യേക വഴിപാടുകളും നടത്തപ്പെടുന്നു."
+          />
+
+          <CountdownPanel
+            title="Monthly Makam Countdown"
+            malayalam="അടുത്ത മകം പൂജ"
+            note="Exact Makam nakshatra date can be updated after committee announcement."
+            countdown={monthlyCountdown}
           />
 
           <div className="mt-12 grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
@@ -118,12 +129,19 @@ function FestivalsPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-6 py-20 md:px-8">
+      <section id="makam-ulsavam" className="mx-auto max-w-7xl scroll-mt-28 px-6 py-20 md:px-8">
         <SectionHeading
           eyebrow="Annual Makam Festival"
           malayalam="ഉത്സവത്തിന്റെ പ്രധാന ആകർഷണങ്ങൾ"
           title="ഭക്തിയും കൂട്ടായ്മയും നിറഞ്ഞ വാർഷിക ആഘോഷം"
           description="ക്ഷേത്ര കമ്മിറ്റിയുടെയും ഭക്തജനങ്ങളുടെയും സഹകരണത്തോടെ മകം ഉത്സവം എല്ലാ വർഷവും ഭംഗിയായി നടത്തിവരുന്നു."
+        />
+
+        <CountdownPanel
+          title="Annual Ulsavam Countdown"
+          malayalam="വാർഷിക മകം ഉത്സവം"
+          note="Festival schedule and exact dates can be updated by the temple committee."
+          countdown={annualCountdown}
         />
 
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -155,5 +173,76 @@ function FestivalsPage() {
         </div>
       </section>
     </>
+  );
+}
+
+function useTempleCountdown(kind: "monthly-makam" | "annual-ulsavam") {
+  const [now, setNow] = useState(() => new Date());
+
+  useEffect(() => {
+    const timer = window.setInterval(() => setNow(new Date()), 1000 * 60);
+    return () => window.clearInterval(timer);
+  }, []);
+
+  return useMemo(() => {
+    const target =
+      kind === "annual-ulsavam"
+        ? new Date(now.getFullYear(), 3, 6, 6, 0, 0)
+        : new Date(now.getFullYear(), now.getMonth(), 15, 6, 0, 0);
+
+    if (target.getTime() <= now.getTime()) {
+      if (kind === "annual-ulsavam") target.setFullYear(now.getFullYear() + 1);
+      else target.setMonth(now.getMonth() + 1);
+    }
+
+    const diff = Math.max(0, target.getTime() - now.getTime());
+    const days = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const minutes = Math.floor((diff % 3600000) / 60000);
+    const date = new Intl.DateTimeFormat("ml-IN", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    }).format(target);
+
+    return [
+      { label: "Date", value: date },
+      { label: "Days", value: String(days).padStart(2, "0") },
+      { label: "Hours", value: String(hours).padStart(2, "0") },
+      { label: "Mins", value: String(minutes).padStart(2, "0") },
+    ];
+  }, [kind, now]);
+}
+
+function CountdownPanel({
+  title,
+  malayalam,
+  note,
+  countdown,
+}: {
+  title: string;
+  malayalam: string;
+  note: string;
+  countdown: Array<{ label: string; value: string }>;
+}) {
+  return (
+    <div className="mx-auto mt-10 max-w-4xl rounded-2xl gradient-maroon p-5 text-white shadow-xl md:p-7">
+      <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+        <div>
+          <CalendarDays className="h-8 w-8 text-gold" />
+          <p className="mt-4 font-display text-xs font-bold uppercase text-gold">{title}</p>
+          <h2 className="mt-1 font-malayalam text-2xl font-bold">{malayalam}</h2>
+          <p className="mt-2 text-sm text-white/72">{note}</p>
+        </div>
+        <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+          {countdown.map((item) => (
+            <div key={item.label} className="rounded-xl bg-white/12 p-3 text-center">
+              <p className="text-lg font-bold">{item.value}</p>
+              <p className="mt-1 text-[10px] font-bold uppercase text-white/65">{item.label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 }
